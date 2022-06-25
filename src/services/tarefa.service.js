@@ -16,6 +16,8 @@ const tarefas = [
   },
 ];
 
+let indexNumber = tarefas.length +1;
+
 const findAllTarefasService = () => {
   return tarefas;
 };
@@ -25,8 +27,9 @@ const findByIdTarefaService = (parametroId) => {
 };
 
 const createTarefaService = (newTarefa) => {
-  const newId = tarefas.length + 1; //cria um novo id
-  newTarefa.id = newId; //crio um campo novo no objeto e coloca o novo id
+  
+  newTarefa.id = indexNumber; 
+  indexNumber++;
   tarefas.push(newTarefa);
   return newTarefa;
 };
