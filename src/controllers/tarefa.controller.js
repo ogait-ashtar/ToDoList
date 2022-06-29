@@ -13,13 +13,13 @@ const findAllTarefasController = async (req, res) => {
 };
 
 const findByIdTarefaController = async (req, res) => {
-  const parametroId = req.params.id;
+  const idParam = req.params.id;
 
-  if (!mongoose.Types.ObjectId.isValid(parametroId)) {//ver c o id é valido no mongoose
+  if (!mongoose.Types.ObjectId.isValid(idParam)) {//ver c o id é valido no mongoose
     res.status(400).send({ message: "Id inválido" }); //verifica c recebeu um id
   }
 
-  const escolhaTarefa = await tarefasService.findByIdTarefaService(parametroId); //passou para o service ele buscou no array e retornou
+  const escolhaTarefa = await tarefasService.findByIdTarefaService(idParam); //passou para o service ele buscou no array e retornou
 
   if (!escolhaTarefa) {
     res.status(404).send({ message: "Tarefa não encontrada" }); // valida c retornar vazio
@@ -28,7 +28,7 @@ const findByIdTarefaController = async (req, res) => {
   res.send(escolhaTarefa);
 };
 
-const createTarefaController = (req, res) => {
+const createTarefaController = async (req, res) => {
   const tarefa = req.body;
 
   if (!tarefa.tarefa || !tarefa.descricao) {
@@ -37,17 +37,17 @@ const createTarefaController = (req, res) => {
       .send({ message: "Envie envie todos os campos da tarefa!" });
   }
 
-  const newTarefa = tarefasService.createTarefaService(tarefa);
+  const newTarefa = await tarefasService.createTarefaService(tarefa);
   res.status(201).send({ message: "Tarefa criada com sucesso!", newTarefa });
 };
 
-const updateTarefaController = (req, res) => {
-  const idParam = Number(req.params.id);
+const updateTarefaController = async (req, res) => {
+  const idParam = req.params.id;
 
-  if (!idParam) {
-    //valida c o id é válido
-    return res.status(400).send({ message: "Id inválido" });
+  if (!mongoose.Types.ObjectId.isValid(idParam)) {//ver c o id é valido no mongoose
+    res.status(400).send({ message: "Id inválido" }); //verifica c recebeu um id
   }
+
 
   const tarefaEdit = req.body;
 
@@ -57,18 +57,19 @@ const updateTarefaController = (req, res) => {
       .send({ message: "Envie envie todos os campos da tarefa!" });
   }
 
-  const updatedTarefa = tarefasService.updateTarefaService(idParam, tarefaEdit);
+  const updatedTarefa = await tarefasService.updateTarefaService(idParam, tarefaEdit);
   res.send({ message: "Tarefa atualizada com sucesso!", updatedTarefa });
 };
 
-const deleteTarefaController = (req, res) => {
-  const idParam = Number(req.params.id);
+const deleteTarefaController = async (req, res) => {
+  const idParam = req.params.id;
 
-  if (!idParam) {
-    return res.status(400).send({ message: "Id inválido" });
+  if (!mongoose.Types.ObjectId.isValid(idParam)) {//ver c o id é valido no mongoose
+    res.status(400).send({ message: "Id inválido" }); //verifica c recebeu um id
   }
 
-  tarefasService.deleteTarefaService(idParam);
+
+  await tarefasService.deleteTarefaService(idParam);
   res.send({ message: "Tarefa deletada com sucesso!" });
 };
 

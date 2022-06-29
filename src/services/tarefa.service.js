@@ -1,3 +1,4 @@
+const Tarefa = require("../models/Tarefa");
 const Tarefas = require("../models/Tarefa");
 
 const findAllTarefasService = async () => {
@@ -7,26 +8,21 @@ const findAllTarefasService = async () => {
 
 const findByIdTarefaService = async (parametroId) => {
   const tarefa = await Tarefas.findById(parametroId);
-  return tarefa
+  return tarefa;
 };
 
-const createTarefaService = (newTarefa) => {
-  newTarefa.id = indexNumber;
-  indexNumber++;
-  tarefas.push(newTarefa);
+const createTarefaService = async (newTarefa) => {
+  const tarefaCreated = await Tarefa.create(newTarefa);
   return newTarefa;
 };
 
-const updateTarefaService = (id, tarefaEdited) => {
-  tarefaEdited["id"] = id; //pego a tarefa editada e add o id
-  const tarefaIndex = tarefas.findIndex((tarefa) => tarefa.id == id); //pega  a posicao no array
-  tarefas[tarefaIndex] = tarefaEdited;
-  return tarefaEdited;
+const updateTarefaService = async (id, tarefaEdited) => {
+  const tarefaUpdate = await Tarefas.findByIdAndUpdate(id, tarefaEdited);
+  return tarefaUpdate;
 };
 
-const deleteTarefaService = (id) => {
-  const tarefaIndex = tarefas.findIndex((tarefa) => tarefa.id == id);
-  return tarefas.splice(tarefaIndex, 1);
+const deleteTarefaService = async (id) => {
+  return await Tarefas.findByIdAndDelete(id);
 };
 
 module.exports = {
