@@ -1,34 +1,17 @@
-const tarefas = [
-  {
-    id: 1,
-    tarefa: "Escovar os dentes",
-    descricao: "Acordar, pegar a pasta, colocar na escova e escovar os dentes",
-  },
-  {
-    id: 2,
-    tarefa: "Tomar Café",
-    descricao: "Pegar o café na cafeteira e colocar no copo, adoçar e beber",
-  },
-  {
-    id: 3,
-    tarefa: "Ligar o carro",
-    descricao: "Pegar a chave, colocar na ignição e dar o giro",
-  },
-];
+const Tarefas = require("../models/Tarefa");
 
-let indexNumber = tarefas.length +1;
-
-const findAllTarefasService = () => {
+const findAllTarefasService = async () => {
+  const tarefas = await Tarefas.find(); //await vai no banco e traz td e coloca na const
   return tarefas;
 };
 
-const findByIdTarefaService = (parametroId) => {
-  return tarefas.find((tarefa) => tarefa.id === parametroId);
+const findByIdTarefaService = async (parametroId) => {
+  const tarefa = await Tarefas.findById(parametroId);
+  return tarefa
 };
 
 const createTarefaService = (newTarefa) => {
-  
-  newTarefa.id = indexNumber; 
+  newTarefa.id = indexNumber;
   indexNumber++;
   tarefas.push(newTarefa);
   return newTarefa;

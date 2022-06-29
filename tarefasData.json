@@ -1,0 +1,14 @@
+[
+  {
+    "tarefa": "Escovar os dentes",
+    "descricao": "Acordar, pegar a pasta, colocar na escova e escovar os dentes"
+  },
+  {
+    "tarefa": "Tomar Café",
+    "descricao": "Pegar o café na cafeteira e colocar no copo, adoçar e beber"
+  },
+  {
+    "tarefa": "Ligar o carro",
+    "descricao": "Pegar a chave, colocar na ignição e dar o giro"
+  }
+]
