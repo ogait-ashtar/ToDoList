@@ -11,5 +11,5 @@ const TarefaSchema = new mongoose.Schema({
   },
 });
 
-const Tarefa = mongoose.model('tarefas', TarefaSchema); //falando q o ttarefas do banco é o tarefaSchema
+const Tarefa = mongoose.model("tarefas", TarefaSchema); //falando q o ttarefas do banco é o tarefaSchema
 module.exports = Tarefa;

@@ -17,7 +17,10 @@ const createTarefaService = async (newTarefa) => {
 };
 
 const updateTarefaService = async (idParam, editTarefa) => {
-  const updateTarefa = await Tarefas.findByIdAndUpdate(idParam, editTarefa).setOptions({ returnOriginal: false});;
+  const updateTarefa = await Tarefas.findByIdAndUpdate(
+    idParam,
+    editTarefa
+  ).setOptions({ returnOriginal: false });
   return updateTarefa;
 };
 
