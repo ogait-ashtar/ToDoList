@@ -3,11 +3,11 @@ const mongoose = require("mongoose");
 const TarefaSchema = new mongoose.Schema({
   tarefa: {
     type: String,
-    require: true,
+    required: true,
   },
   descricao: {
     type: String,
-    require: true,
+    required: true,
   },
 });
 

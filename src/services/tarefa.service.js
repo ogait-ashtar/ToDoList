@@ -2,27 +2,27 @@ const Tarefa = require("../models/Tarefa");
 const Tarefas = require("../models/Tarefa");
 
 const findAllTarefasService = async () => {
-  const tarefas = await Tarefas.find(); //await vai no banco e traz td e coloca na const
-  return tarefas;
+  const allTarefas = await Tarefas.find(); //await vai no banco e traz td e coloca na const
+  return allTarefas;
 };
 
-const findByIdTarefaService = async (parametroId) => {
-  const tarefa = await Tarefas.findById(parametroId);
-  return tarefa;
+const findByIdTarefaService = async (idParam) => {
+  const oneTarefa = await Tarefas.findById(idParam);
+  return oneTarefa;
 };
 
 const createTarefaService = async (newTarefa) => {
-  const tarefaCreated = await Tarefa.create(newTarefa);
-  return newTarefa;
+  const createdTarefa = await Tarefa.create(newTarefa);
+  return createdTarefa;
 };
 
-const updateTarefaService = async (id, tarefaEdited) => {
-  const tarefaUpdate = await Tarefas.findByIdAndUpdate(id, tarefaEdited);
-  return tarefaUpdate;
+const updateTarefaService = async (idParam, editTarefa) => {
+  const updateTarefa = await Tarefas.findByIdAndUpdate(idParam, editTarefa).setOptions({ returnOriginal: false});;
+  return updateTarefa;
 };
 
-const deleteTarefaService = async (id) => {
-  return await Tarefas.findByIdAndDelete(id);
+const deleteTarefaService = async (idParam) => {
+  return await Tarefas.findByIdAndDelete(idParam);
 };
 
 module.exports = {

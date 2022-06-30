@@ -2,14 +2,14 @@ const { default: mongoose } = require("mongoose");
 const tarefasService = require("../services/tarefa.service");
 
 const findAllTarefasController = async (req, res) => {
-  const tarefas = await tarefasService.findAllTarefasService();
+  const allTarefas = await tarefasService.findAllTarefasService();
 
-  if (tarefas.length == 0) {
+  if (allTarefas.length == 0) {
     // c o array esta vazio manda message
     return res.status(404).send({ message: "Nenhuma tarefa está cadastrada" });
   }
 
-  res.send(tarefas);
+  res.send(allTarefas);
 };
 
 const findByIdTarefaController = async (req, res) => {
@@ -19,13 +19,13 @@ const findByIdTarefaController = async (req, res) => {
     res.status(400).send({ message: "Id inválido" }); //verifica c recebeu um id
   }
 
-  const escolhaTarefa = await tarefasService.findByIdTarefaService(idParam); //passou para o service ele buscou no array e retornou
+  const chosenTarefa = await tarefasService.findByIdTarefaService(idParam); //passou para o service ele buscou no array e retornou
 
-  if (!escolhaTarefa) {
+  if (!chosenTarefa) {
     res.status(404).send({ message: "Tarefa não encontrada" }); // valida c retornar vazio
   }
 
-  res.send(escolhaTarefa);
+  res.send(chosenTarefa);
 };
 
 const createTarefaController = async (req, res) => {
@@ -49,15 +49,15 @@ const updateTarefaController = async (req, res) => {
   }
 
 
-  const tarefaEdit = req.body;
+  const editTarefa = req.body;
 
-  if (!tarefaEdit.tarefa || !tarefaEdit.descricao) {
+  if (!editTarefa.tarefa || !editTarefa.descricao) {
     return res
       .status(400)
       .send({ message: "Envie envie todos os campos da tarefa!" });
   }
 
-  const updatedTarefa = await tarefasService.updateTarefaService(idParam, tarefaEdit);
+  const updatedTarefa = await tarefasService.updateTarefaService(idParam, editTarefa);
   res.send({ message: "Tarefa atualizada com sucesso!", updatedTarefa });
 };
 
