@@ -1,4 +1,4 @@
-const Tarefa = require("../models/Tarefa");
+// const Tarefa = require("../models/Tarefa");
 const Tarefas = require("../models/Tarefa");
 
 const findAllTarefasService = async () => {
@@ -12,7 +12,7 @@ const findByIdTarefaService = async (idParam) => {
 };
 
 const createTarefaService = async (newTarefa) => {
-  const createdTarefa = await Tarefa.create(newTarefa);
+  const createdTarefa = await Tarefas.create(newTarefa);
   return createdTarefa;
 };
 
